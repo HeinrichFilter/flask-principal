@@ -1,4 +1,3 @@
-
 Flask Principal
 ===============
 
@@ -131,7 +130,8 @@ Flask-Principal::
 
     Principal(app)
 
-    login_manager = LoginManager(app)
+    login_manager = LoginManager()
+    login_manager.setup_app(app)
 
     @login_manager.user_loader
     def load_user(userid):
@@ -145,7 +145,7 @@ Flask-Principal::
     @app.route('/login', methods=['GET', 'POST'])
     def login():
         # A hypothetical login form that uses Flask-WTF
-        form = LoginForm()
+        form = LoginForm(request.form)
 
         # Validate form input
         if form.validate_on_submit():
